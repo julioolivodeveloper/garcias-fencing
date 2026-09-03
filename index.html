@@ -378,6 +378,27 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
 .reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
 .reveal-right.visible{opacity:1;transform:translateX(0)}
 
+/* CONTACT POPUP */
+#contact-popup{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
+#contact-popup.open{display:flex}
+.popup-card{background:#fff;border-radius:20px;padding:36px 28px;max-width:340px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:popIn .25s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.popup-card h3{font-size:1.2rem;font-weight:800;color:#1a2e1a;margin-bottom:6px}
+.popup-card p{font-size:.88rem;color:#64748b;margin-bottom:28px}
+.popup-btn{display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;border:none;transition:transform .15s,box-shadow .2s;text-decoration:none;margin-bottom:12px}
+.popup-btn:last-of-type{margin-bottom:0}
+.popup-btn-wa{background:#25d366;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.35)}
+.popup-btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.45)}
+.popup-btn-sms{background:#3d8c3d;color:#fff;box-shadow:0 4px 16px rgba(61,140,61,.35)}
+.popup-btn-sms:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(61,140,61,.45)}
+.popup-btn-icon{width:42px;height:42px;background:rgba(255,255,255,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.popup-btn-icon svg{width:22px;height:22px;fill:#fff}
+.popup-btn-text{text-align:left}
+.popup-btn-text span{display:block;font-size:.7rem;opacity:.8;font-weight:500}
+.popup-btn-text strong{display:block;font-size:1rem}
+.popup-close{margin-top:18px;background:none;border:none;color:#94a3b8;font-size:.85rem;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}
+.popup-close:hover{color:#64748b}
+
 /* RESPONSIVE */
 @media(max-width:1024px){.services-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}.areas-wrap{grid-template-columns:1fr;gap:32px}.contact-grid{grid-template-columns:1fr;gap:32px}}
@@ -421,7 +442,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
   </ul>
   <div class="nav-right">
     <button class="lang-btn" onclick="toggleLang()">🌐 ES</button>
-    <a href="tel:+19255674018" class="btn-nav">📞 Call Now</a>
+    <a href="#" onclick="showContactPopup(event)" class="btn-nav">📞 Call Now</a>
     <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
@@ -457,7 +478,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
     </a>
   </div>
   <div class="mobile-menu-cta">
-    <a href="tel:+19255674018" class="mob-call-btn">
+    <a href="#" onclick="showContactPopup(event)" class="mob-call-btn">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 6.18 2 2 0 014.11 4h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.574 2.81.7A2 2 0 0122 16.92z"/></svg>
       (925) 567-4018
     </a>
@@ -486,7 +507,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
       Fence installation, repair, decks, arbors, retaining walls, wood staining & power washing. Free estimates. Serving the entire Bay Area!
     </p>
     <div class="hero-ctas">
-      <a href="tel:+19255674018" class="btn-primary">
+      <a href="#" onclick="showContactPopup(event)" class="btn-primary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 5.18 2 2 0 015.09 3h3a2 2 0 012 1.72c.12.96.37 1.9.73 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.36 1.85.61 2.81.73A2 2 0 0122 16.92z"/></svg>
         <span data-en="Call Now" data-es="Llama Ahora">Call Now</span>
       </a>
@@ -701,6 +722,33 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
   </div>
 </section>
 
+<!-- CONTACT POPUP -->
+<div id="contact-popup">
+  <div class="popup-card">
+    <h3>Contact Garcia's Fencing</h3>
+    <p>(925) 567-4018</p>
+    <a href="https://wa.me/19255674018" target="_blank" rel="noopener" class="popup-btn popup-btn-wa">
+      <div class="popup-btn-icon">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.09a.75.75 0 00.906.976l5.347-1.472A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.715 9.715 0 01-4.92-1.338l-.353-.21-3.653 1.005 1.033-3.546-.23-.365A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+      </div>
+      <div class="popup-btn-text">
+        <span>Send a message on</span>
+        <strong>WhatsApp</strong>
+      </div>
+    </a>
+    <a href="sms:+19255674018" class="popup-btn popup-btn-sms">
+      <div class="popup-btn-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+      </div>
+      <div class="popup-btn-text">
+        <span>Send a</span>
+        <strong>Text Message</strong>
+      </div>
+    </a>
+    <button class="popup-close" onclick="closeContactPopup()">✕ Close</button>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div id="lightbox">
   <span id="lightbox-close" onclick="closeLightbox()">✕</span>
@@ -737,7 +785,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
         <div class="areas-visual-overlay">
           <h3 data-en="Bay Area Wide Coverage" data-es="Cobertura en Todo el Área de la Bahía">Bay Area Wide Coverage</h3>
           <p data-en="We serve homeowners across the entire Bay Area. Call us for a free on-site estimate — no obligation." data-es="Servimos a propietarios de toda el Área de la Bahía. Llámanos para un estimado gratuito en el sitio — sin compromiso.">We serve homeowners across the entire Bay Area. Call us for a free on-site estimate — no obligation.</p>
-          <a href="tel:+19255674018" class="areas-cta">📞 (925) 567-4018</a>
+          <a href="#" onclick="showContactPopup(event)" class="areas-cta">📞 (925) 567-4018</a>
         </div>
       </div>
     </div>
@@ -869,7 +917,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
           <h3 data-en="Reach Us Directly" data-es="Contáctanos Directamente">Reach Us Directly</h3>
           <p data-en="We answer calls 7 days a week and come out for free estimates. No job is too big or too small — fences, decks, arbors, and more." data-es="Contestamos llamadas 7 días a la semana y salimos para estimados gratis. Ningún trabajo es demasiado grande o pequeño — cercas, decks, enramadas y más.">We answer calls 7 days a week and come out for free estimates. No job is too big or too small — fences, decks, arbors, and more.</p>
           <div class="contact-items">
-            <a href="tel:+19255674018" class="contact-item">
+            <a href="#" onclick="showContactPopup(event)" class="contact-item">
               <div class="contact-item-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 5.18 2 2 0 015.09 3h3a2 2 0 012 1.72c.12.96.37 1.9.73 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.36 1.85.61 2.81.73A2 2 0 0122 16.92z"/></svg></div>
               <div class="contact-item-text">
                 <span data-en="Phone / Text" data-es="Teléfono / Texto">Phone / Text</span>
@@ -953,7 +1001,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
     <h2 data-en="Ready to Transform Your Property?" data-es="¿Listo para Transformar tu Propiedad?">Ready to Transform Your Property?</h2>
     <p data-en="Call Garcia's Fencing today for a free estimate. Bay Area's trusted fence and outdoor construction experts." data-es="Llama a García's Fencing hoy para un estimado gratis. Los expertos confiables en cercas y construcción exterior del Área de la Bahía.">Call Garcia's Fencing today for a free estimate. Bay Area's trusted fence and outdoor construction experts.</p>
     <div class="banner-ctas">
-      <a href="tel:+19255674018" class="btn-white">
+      <a href="#" onclick="showContactPopup(event)" class="btn-white">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 5.18 2 2 0 015.09 3h3a2 2 0 012 1.72c.12.96.37 1.9.73 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.36 1.85.61 2.81.73A2 2 0 0122 16.92z"/></svg>
         <span data-en="Call (925) 567-4018" data-es="Llama (925) 567-4018">Call (925) 567-4018</span>
       </a>
@@ -980,7 +1028,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
       </iframe>
     </div>
     <div class="map-cta-row">
-      <a href="tel:+19255674018" class="btn-primary" style="font-size:.9rem;padding:12px 24px">
+      <a href="#" onclick="showContactPopup(event)" class="btn-primary" style="font-size:.9rem;padding:12px 24px">
         📞 <span data-en="Call for Free Estimate" data-es="Llama para Estimado Gratis">Call for Free Estimate</span>
       </a>
       <div class="map-badge">
@@ -1024,7 +1072,7 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
         <li><a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
         <li><a href="#areas" data-en="Service Areas" data-es="Áreas de Servicio">Service Areas</a></li>
         <li><a href="#contact" data-en="Free Estimate" data-es="Estimado Gratis">Free Estimate</a></li>
-        <li><a href="tel:+19255674018">(925) 567-4018</a></li>
+        <li><a href="#" onclick="showContactPopup(event)">(925) 567-4018</a></li>
       </ul>
     </div>
   </div>
@@ -1035,6 +1083,19 @@ footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08);padding:56px 24px
 </footer>
 
 <script>
+function showContactPopup(e) {
+  if (e) e.preventDefault();
+  document.getElementById('contact-popup').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeContactPopup() {
+  document.getElementById('contact-popup').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('contact-popup').addEventListener('click', function(e) {
+  if (e.target === this) closeContactPopup();
+});
+
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 });
